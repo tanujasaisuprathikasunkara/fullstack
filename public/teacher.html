@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Teacher Dashboard</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+    <h1 class="h1">COLLEGE NOTICE BOARD</h1>
+
+    <div class="login-form">
+
+        <h2>Teacher Dashboard</h2>
+
+        <h3>Welcome Teacher!</h3>
+
+        <p>
+            You can post notices and quiz links for students.
+        </p>
+
+        <hr>
+
+        <!-- POST NOTICE -->
+
+        <h3>📢 Post a Notice</h3>
+
+        <textarea
+            id="notice"
+            rows="5"
+            placeholder="Enter your notice">
+        </textarea>
+
+        <br><br>
+
+        <button class="button" onclick="postNotice()">
+            Post Notice
+        </button>
+
+        <p id="noticeMessage"></p>
+
+        <hr>
+
+        <!-- ADD QUIZ LINK -->
+
+        <h3>📝 Add Quiz Link</h3>
+
+        <input
+            type="text"
+            id="quizTitle"
+            placeholder="Enter quiz title">
+
+        <br><br>
+
+        <input
+            type="text"
+            id="quizUrl"
+            placeholder="Paste quiz link">
+
+        <br><br>
+
+        <button class="button" onclick="addQuizLink()">
+            Add Quiz Link
+        </button>
+
+        <p id="quizMessage"></p>
+
+        <hr>
+
+        <a href="/">
+            <button class="button">Logout</button>
+        </a>
+
+    </div>
+
+
+<script>
+
+// ================= POST NOTICE =================
+
+async function postNotice() {
+
+    let notice =
+        document.getElementById("notice").value.trim();
+
+    let message =
+        document.getElementById("noticeMessage");
+
+    if (notice === "") {
+
+        message.innerHTML =
+            "Please enter a notice.";
+
+        message.style.color = "red";
+
+        return;
+    }
+
+    try {
+
+        let response = await fetch("/notices", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                notice: notice
+            })
+
+        });
+
+        let data = await response.json();
+
+        if (response.ok) {
+
+            message.innerHTML =
+                "Notice posted successfully!";
+
+            message.style.color = "green";
+
+            document.getElementById("notice").value = "";
+
+        } else {
+
+            message.innerHTML = data.message;
+
+            message.style.color = "red";
+        }
+
+    } catch (error) {
+
+        message.innerHTML =
+            "Error posting notice.";
+
+        message.style.color = "red";
+    }
+}
+
+
+// ================= ADD QUIZ LINK =================
+
+async function addQuizLink() {
+
+    let title =
+        document.getElementById("quizTitle").value.trim();
+
+    let url =
+        document.getElementById("quizUrl").value.trim();
+
+    let message =
+        document.getElementById("quizMessage");
+
+
+    if (title === "" || url === "") {
+
+        message.innerHTML =
+            "Please enter quiz title and link.";
+
+        message.style.color = "red";
+
+        return;
+    }
+
+
+    // Check whether the link starts with http or https
+
+    if (!url.startsWith("http://") &&
+        !url.startsWith("https://")) {
+
+        message.innerHTML =
+            "Please enter a valid link starting with https://";
+
+        message.style.color = "red";
+
+        return;
+    }
+
+
+    try {
+
+        let response = await fetch("/quiz-links", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                title: title,
+                url: url
+            })
+
+        });
+
+
+        let data = await response.json();
+
+
+        if (response.ok) {
+
+            message.innerHTML =
+                "Quiz link added successfully!";
+
+            message.style.color = "green";
+
+
+            document.getElementById("quizTitle").value = "";
+
+            document.getElementById("quizUrl").value = "";
+
+        } else {
+
+            message.innerHTML =
+                data.message;
+
+            message.style.color = "red";
+        }
+
+
+    } catch (error) {
+
+        message.innerHTML =
+            "Error adding quiz link.";
+
+        message.style.color = "red";
+    }
+}
+
+</script>
+
+</body>
+
+</html>

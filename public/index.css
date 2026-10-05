@@ -1,0 +1,332 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: linear-gradient(135deg, #e3f2fd, #f5f7ff);
+
+    min-height: 100vh;
+
+    color: #333;
+}
+
+
+
+
+.h1 {
+    margin: 0;
+
+    padding: 25px 20px;
+
+    text-align: center;
+
+    background: linear-gradient(135deg, #123c69, #1d5d9b);
+
+    color: white;
+
+    font-size: 32px;
+
+    letter-spacing: 1px;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.login-form {
+    width: 90%;
+
+    max-width: 500px;
+
+    margin: 70px auto;
+
+    padding: 35px;
+
+    background: white;
+
+    border-radius: 15px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+
+    text-align: center;
+}
+
+
+
+.login-form h2 {
+    margin-top: 0;
+
+    color: #123c69;
+
+    font-size: 28px;
+}
+
+
+.login-form h3 {
+    color: #1d5d9b;
+
+    margin-top: 20px;
+}
+
+
+.login-form p {
+    color: #555;
+
+    line-height: 1.6;
+}
+
+
+
+input {
+    width: 90%;
+
+    padding: 13px;
+
+    margin: 5px 0;
+
+    border: 1px solid #ccc;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+
+    outline: none;
+
+    transition: 0.3s;
+}
+
+
+
+
+input:focus {
+    border-color: #1d5d9b;
+
+    box-shadow: 0 0 6px rgba(29, 93, 155, 0.25);
+}
+
+
+/* =========================
+   TEXTAREA
+========================= */
+
+textarea {
+    width: 90%;
+
+    padding: 13px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    resize: vertical;
+
+    outline: none;
+
+    transition: 0.3s;
+}
+
+
+textarea:focus {
+    border-color: #1d5d9b;
+
+    box-shadow: 0 0 6px rgba(29, 93, 155, 0.25);
+}
+
+
+/* =========================
+   BUTTON CONTAINER
+========================= */
+
+.button-container {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.button {
+    padding: 12px 22px;
+
+    background: linear-gradient(135deg, #123c69, #1d5d9b);
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Button hover */
+
+.button:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.2);
+
+    background: linear-gradient(135deg, #0d3157, #174f87);
+}
+
+
+/* Button click */
+
+.button:active {
+    transform: translateY(0);
+}
+
+
+
+#noticeList {
+    text-align: left;
+
+    margin-top: 20px;
+}
+
+
+
+
+#noticeList div {
+    background: #f5f9ff;
+
+    border-left: 5px solid #1d5d9b;
+
+    padding: 15px;
+
+    margin-bottom: 15px;
+
+    border-radius: 8px;
+
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+
+    transition: 0.3s;
+}
+
+
+/* Notice hover */
+
+#noticeList div:hover {
+    transform: translateX(4px);
+
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
+}
+
+
+/* Notice text */
+
+#noticeList p {
+    margin: 0 0 8px 0;
+
+    color: #123c69;
+
+    font-size: 16px;
+}
+
+
+/* Notice date */
+
+#noticeList small {
+    color: #777;
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   HORIZONTAL LINE
+========================= */
+
+hr {
+    border: none;
+
+    border-top: 1px solid #ddd;
+
+    margin: 25px 0;
+}
+
+
+/* =========================
+   SUCCESS MESSAGE
+========================= */
+
+#noticeMessage {
+    font-weight: bold;
+
+    margin-top: 15px;
+}
+
+
+/* =========================
+   LOGOUT LINK
+========================= */
+
+a {
+    text-decoration: none;
+}
+
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+
+    .h1 {
+        font-size: 24px;
+
+        padding: 20px 10px;
+    }
+
+
+    .login-form {
+        width: 92%;
+
+        margin: 40px auto;
+
+        padding: 25px 15px;
+    }
+
+
+    .button-container {
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+
+    .button {
+        width: 85%;
+    }
+
+
+    input,
+    textarea {
+        width: 90%;
+    }
+
+}

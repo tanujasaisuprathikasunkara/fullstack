@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>College Notice Board Portal</title>
+
+    <link rel="stylesheet" href="index.css">
+
+</head>
+
+<body>
+
+    <h1 class="h1">
+        COLLEGE NOTICE BOARD
+    </h1>
+
+
+    <div class="login-form">
+
+        <h2>Login</h2>
+
+        <input
+            type="email"
+            id="user-name"
+            placeholder="Enter College Email"
+        >
+
+        <br><br>
+
+        <input
+            type="password"
+            id="passw"
+            placeholder="Enter Password"
+        >
+
+        <br><br>
+
+
+        <div class="button-container">
+
+            <button
+                onclick="login('student')"
+                class="button">
+
+                Student Portal
+
+            </button>
+
+
+            <button
+                onclick="login('teacher')"
+                class="button">
+
+                Teacher Login
+
+            </button>
+
+        </div>
+
+
+        <p id="msg"></p>
+
+    </div>
+
+
+    <script>
+
+        function login(role) {
+
+            let user =
+                document.getElementById("user-name").value.trim();
+
+            let passw =
+                document.getElementById("passw").value.trim();
+
+            let msgElement =
+                document.getElementById("msg");
+
+
+            if (user === "") {
+
+                msgElement.innerHTML =
+                    "Please enter your email.";
+
+                return;
+
+            }
+
+
+          
+            if (passw === "") {
+
+                msgElement.innerHTML =
+                    "Please enter your password.";
+
+                return;
+
+            }
+
+
+        
+            if (role === "student") {
+
+                let studentPattern =
+                    /^student[0-9]+@college\.edu$/;
+
+
+                if (!studentPattern.test(user)) {
+
+                    msgElement.innerHTML =
+                        "Student email must be like student123@college.edu";
+
+                    return;
+
+                }
+
+
+                window.location.href =
+                    "/student/dashboard";
+
+            }
+
+
+           
+            else if (role === "teacher") {
+
+                let teacherPattern =
+                    /^teacher[0-9]+@college\.edu$/;
+
+
+                if (!teacherPattern.test(user)) {
+
+                    msgElement.innerHTML =
+                        "Teacher email must be like teacher123@college.edu";
+
+                    return;
+
+                }
+
+
+                window.location.href =
+                    "/teacher/dashboard";
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

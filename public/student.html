@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Student Dashboard</title>
+
+    <link rel="stylesheet" href="index.css">
+
+</head>
+
+<body>
+
+    <h1 class="h1">COLLEGE NOTICE BOARD</h1>
+
+
+    <div class="login-form">
+
+        <h2>Student Dashboard</h2>
+
+        <h3>Welcome Student!</h3>
+
+        <p>
+            View college notices and available quizzes here.
+        </p>
+
+
+        <hr>
+
+
+        <!-- NOTICES -->
+
+        <h3>📢 College Notices</h3>
+
+        <div id="noticeList">
+
+            <p>Loading notices...</p>
+
+        </div>
+
+
+        <hr>
+
+
+        <!-- QUIZ LINKS -->
+
+        <h3>📝 Available Quizzes</h3>
+
+        <div id="quizList">
+
+            <p>Loading quizzes...</p>
+
+        </div>
+
+
+        <br>
+
+
+        <a href="/">
+            <button class="button">Logout</button>
+        </a>
+
+    </div>
+
+
+
+<script>
+
+// ================= LOAD NOTICES =================
+
+async function loadNotices() {
+
+    try {
+
+        let response =
+            await fetch("/notices");
+
+        let notices =
+            await response.json();
+
+        let noticeList =
+            document.getElementById("noticeList");
+
+
+        if (notices.length === 0) {
+
+            noticeList.innerHTML =
+                "<p>No notices available.</p>";
+
+            return;
+        }
+
+
+        noticeList.innerHTML = "";
+
+
+        notices.forEach(function(notice) {
+
+            let div =
+                document.createElement("div");
+
+
+            div.innerHTML = `
+
+                <p>
+                    <strong>📢 ${notice.text}</strong>
+                </p>
+
+                <small>
+                    Posted on: ${notice.date}
+                </small>
+
+            `;
+
+
+            noticeList.appendChild(div);
+
+        });
+
+
+    } catch (error) {
+
+        document.getElementById("noticeList").innerHTML =
+            "<p>Unable to load notices.</p>";
+    }
+}
+
+
+
+async function loadQuizLinks() {
+
+    try {
+
+        let response =
+            await fetch("/quiz-links");
+
+        let quizzes =
+            await response.json();
+
+        let quizList =
+            document.getElementById("quizList");
+
+
+        if (quizzes.length === 0) {
+
+            quizList.innerHTML =
+                "<p>No quizzes available.</p>";
+
+            return;
+        }
+
+
+        quizList.innerHTML = "";
+
+
+        quizzes.forEach(function(quiz) {
+
+            let div =
+                document.createElement("div");
+
+
+            div.innerHTML = `
+
+                <p>
+                    <strong>📝 ${quiz.title}</strong>
+                </p>
+
+                <small>
+                    Added on: ${quiz.date}
+                </small>
+
+                <br><br>
+
+                <a href="${quiz.url}" target="_blank">
+
+                    <button class="button">
+                        Take Quiz
+                    </button>
+
+                </a>
+
+            `;
+
+
+            quizList.appendChild(div);
+
+        });
+
+
+    } catch (error) {
+
+        document.getElementById("quizList").innerHTML =
+            "<p>Unable to load quizzes.</p>";
+    }
+}
+
+
+
+// LOAD DATA
+
+loadNotices();
+
+loadQuizLinks();
+
+</script>
+
+
+</body>
+
+</html>
